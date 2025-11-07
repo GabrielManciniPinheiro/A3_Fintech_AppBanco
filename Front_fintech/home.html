@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tech Bank</title>
+    <!-- Link para o seu CSS externo (agora com o tema dark) -->
     <link rel="stylesheet" href="css/home.css">
 </head>
 <body>
@@ -11,13 +12,16 @@
         <div class="header-content">
             <div class="user-info">
                 <div class="avatar">
-                    <span>USER</span>
+                    <!-- ID ADICIONADO AQUI, como você gostou (para a inicial) -->
+                    <span id="avatar-inicial">U</span>
                 </div>
                 <div class="user-details">
-                    <h1 class="user-name">User</h1>
+                    <!-- ID ADICIONADO AQUI (para o nome) -->
+                    <h1 class="user-name" id="user-name-display">Carregando...</h1>
                 </div>
             </div>
             <div class="header-icons">
+                <!-- Ícones de enfeite (sem função por enquanto) -->
                 <button class="icon-btn">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                         <circle cx="11" cy="11" r="8" stroke="white" stroke-width="2"/>
@@ -44,15 +48,10 @@
     <main class="main-content">
         <div class="drag-handle"></div>
         <div class="section-header">
-            <h2>Meu Banco</h2>
-            <svg class="eye-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M3 10C3 10 7 4 12 4C17 4 21 10 21 10" stroke="#333" stroke-width="2"/>
-                <path d="M3 10C3 10 7 16 12 16C17 16 21 10 21 10" stroke="#333" stroke-width="2"/>
-                <circle cx="12" cy="10" r="2" fill="#333"/>
-                <line x1="4" y1="4" x2="20" y2="20" stroke="#333" stroke-width="2"/>
-            </svg>
+            <h2> Minha Conta</h2>
         </div>
         <div class="action-cards">
+            <!-- Este link já está correto, levando para a próxima tela -->
             <a href="novaTransferencia.html" class="action-card">
                 <div class="card-icon orange">
                     <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
@@ -64,6 +63,7 @@
                 </div>
                 <span>Pix e transferir</span>
             </a>
+            <!-- Você pode adicionar mais action-cards aqui se quiser -->
         </div>
         <div class="account-section">
             <div class="account-header">
@@ -79,7 +79,16 @@
             </div>
             <div class="balance-section">
                 <p class="balance-label">Saldo</p>
-                <p class="balance-value">••••</p>
+                <!-- ID ADICIONADO AQUI (para o valor do saldo) -->
+                <p class="balance-value" id="saldo-valor">••••</p> <svg class="eye-icon" id="toggleSaldo" width="24" height="24" viewBox="0 0 24 24" fill="none" style="cursor: pointer;">
+                <!-- Este ícone é o "olho fechado" (com a linha).
+                     Vamos trocá-lo dinamicamente se precisar. -->
+                <path d="M3 10C3 10 7 4 12 4C17 4 21 10 21 10" stroke="#809BFF" stroke-width="2"/>
+                <path d="M3 10C3 10 7 16 12 16C17 16 21 10 21 10" stroke="#809BFF" stroke-width="2"/>
+                <circle cx="12" cy="10" r="2" fill="#809BFF"/>
+                <line x1="4" y1="4" x2="20" y2="20" stroke="#809BFF" stroke-width="2"/>
+            </svg>
+                <!-- ID ADICIONADO AQUI (para o "olho" que mostra o saldo) -->
             </div>
             <div class="divider"></div>
             <div class="limit-section">
@@ -114,12 +123,110 @@
             <div class="nav-icon-wrapper">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                     <path d="M3 9L12 2L21 9V20C21 20.5304 20.7893 21.0391 20.4142 21.4142C20.0391 21.7893 19.5304 22 19 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0391 3 20.5304 3 20V9Z" fill="white"/>
-                    <path d="M9 22V12H15V22" fill="#003380"/>
+                    <path d="M9 22V12H15V22" fill="#0B0B22"/> <!-- Cor do fundo do body -->
                 </svg>
                 <span></span>
             </div>
             <span>Home</span>
         </button>
+        <!-- Outros botões de navegação (sem função) -->
     </nav>
+
+    <!--
+    ==================================================================
+    == SCRIPT DE FUNCIONALIDADE (Exatamente o mesmo de antes)
+    ==================================================================
+    -->
+    <script>
+        // Variáveis globais para guardar os dados
+        let userBalance = 0;
+        let saldoVisivel = false;
+
+        // Mapeia os elementos do SEU HTML que acabamos de adicionar IDs
+        const saldoValorEl = document.getElementById('saldo-valor');
+        const toggleSaldoEl = document.getElementById('toggleSaldo'); // O SVG do "olho"
+        const userNameEl = document.getElementById('user-name-display'); // O <h1>
+        const avatarEl = document.getElementById('avatar-inicial'); // O <span>
+
+        // --- (Opcional) SVG do olho "aberto" (sem o traço) ---
+        const olhoAbertoSVG = `
+            <path d="M3 10C3 10 7 4 12 4C17 4 21 10 21 10" stroke="#809BFF" stroke-width="2"/>
+            <path d="M3 10C3 10 7 16 12 16C17 16 21 10 21 10" stroke="#809BFF" stroke-width="2"/>
+            <circle cx="12" cy="10" r="2" fill="#809BFF"/>
+        `;
+        // --- (Opcional) SVG do olho "fechado" (com o traço) ---
+        const olhoFechadoSVG = `
+            <path d="M3 10C3 10 7 4 12 4C17 4 21 10 21 10" stroke="#809BFF" stroke-width="2"/>
+            <path d="M3 10C3 10 7 16 12 16C17 16 21 10 21 10" stroke="#809BFF" stroke-width="2"/>
+            <circle cx="12" cy="10" r="2" fill="#809BFF"/>
+            <line x1="4" y1="4" x2="20" y2="20" stroke="#809BFF" stroke-width="2"/>
+        `;
+
+        // --- Funcionalidade 1: Ao carregar a página ---
+        document.addEventListener('DOMContentLoaded', async () => {
+            // 1. Verifica se o usuário está logado (procura o token)
+            const token = localStorage.getItem('jwtToken');
+            if (!token) {
+                // Se não tem token, expulsa para a tela de login
+                alert('Você não está logado.');
+                window.location.href = 'login.html';
+                return;
+            }
+
+            // 2. Coloca o nome do usuário (que salvamos no login)
+            const userName = localStorage.getItem('userName');
+            if (userName) {
+                userNameEl.textContent = userName;
+                avatarEl.textContent = userName.charAt(0).toUpperCase();
+            }
+
+            // 3. Busca os dados completos da API (saldo, etc.)
+            try {
+                const response = await fetch('http://localhost:8080/api/v1/usuarios/me', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}` // Envia o "passe" de segurança
+                    }
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    // Guarda o saldo na variável global
+                    userBalance = data.saldo;
+                    // Salva o CPF do usuário logado para usar na tela de transferência
+                    localStorage.setItem('userCpf', data.cpf);
+                } else {
+                    // Se o token estiver errado ou expirado
+                    alert('Sua sessão expirou. Faça login novamente.');
+                    localStorage.clear(); // Limpa o "cofre" do navegador
+                    window.location.href = 'login.html';
+                }
+            } catch (error) {
+                console.error('Erro de rede:', error);
+                saldoValorEl.textContent = 'Erro de rede';
+            }
+        });
+
+        // --- Funcionalidade 2: Mostrar/Ocultar Saldo (clique no "olho") ---
+        toggleSaldoEl.addEventListener('click', () => {
+            saldoVisivel = !saldoVisivel; // Inverte o estado (true/false)
+
+            if (saldoVisivel) {
+                // Se for para mostrar, formata o número como moeda
+                saldoValorEl.textContent = userBalance.toLocaleString('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL'
+                });
+                // (Opcional) Mudar o ícone do "olho" para "olho aberto"
+                toggleSaldoEl.innerHTML = olhoAbertoSVG;
+            } else {
+                // Se for para esconder, volta os "••••"
+                saldoValorEl.textContent = '••••';
+                // (Opcional) Mudar o ícone de volta para "olho fechado"
+                toggleSaldoEl.innerHTML = olhoFechadoSVG;
+            }
+        });
+
+    </script>
 </body>
 </html>
