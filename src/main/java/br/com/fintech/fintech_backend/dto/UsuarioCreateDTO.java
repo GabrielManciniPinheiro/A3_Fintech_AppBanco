@@ -1,5 +1,6 @@
 package br.com.fintech.fintech_backend.dto;
 
+import br.com.fintech.fintech_backend.validation.CPF;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -14,6 +15,7 @@ public class UsuarioCreateDTO {
 
     @NotBlank(message = "CPF não pode ser vazio")
     @Size(min = 11, max = 11, message = "CPF deve ter 11 dígitos")
+    @CPF
     private String cpf;
 
     @NotBlank(message = "Email não pode ser vazio")

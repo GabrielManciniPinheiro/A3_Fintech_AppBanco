@@ -1,0 +1,28 @@
+UPDATE contas
+SET saldo = 5000.00
+WHERE id = <ID_DA_CONTA>;
+
+
+
+SET SQL_SAFE_UPDATES = 0;
+SET @userIdToDelete := (SELECT id FROM usuarios WHERE cpf = '11122233344');
+DELETE FROM transferencias
+WHERE remetente_id = @userIdToDelete OR destinatario_id = @userIdToDelete;
+DELETE FROM contas
+WHERE usuario_id = @userIdToDelete;
+DELETE FROM usuarios
+WHERE id = @userIdToDelete;
+SET SQL_SAFE_UPDATES = 1;
+COMMIT;
+
+*/DELETA TODO O BANCO DE DADOS /*
+
+SET SQL_SAFE_UPDATES = 0;
+SET FOREIGN_KEY_CHECKS = 0;
+TRUNCATE TABLE transferencias;
+TRUNCATE TABLE contas;
+TRUNCATE TABLE usuarios;
+SET FOREIGN_KEY_CHECKS = 1;
+SET SQL_SAFE_UPDATES = 1;
+COMMIT;
+

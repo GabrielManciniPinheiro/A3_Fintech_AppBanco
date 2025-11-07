@@ -107,8 +107,8 @@ public class TransferenciaServiceImpl implements TransferenciaService {
         if (ultimas10.isEmpty()) return false;
         BigDecimal soma = ultimas10.stream().map(Transferencia::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
         BigDecimal media = soma.divide(BigDecimal.valueOf(ultimas10.size()), 4, RoundingMode.HALF_UP);
-        BigDecimal mediaMais250pct = media.multiply(BigDecimal.valueOf(2.50));
-        return valorAtual.compareTo(mediaMais250pct) > 0;
+        BigDecimal mediaMais150pct = media.multiply(BigDecimal.valueOf(1.50));
+        return valorAtual.compareTo(mediaMais150pct) > 0;
     }
 
     private boolean checkRegra2_ContaDestinatarioRecente(Conta contaDestinatario, LocalDateTime dataTx) {

@@ -219,7 +219,8 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1rem;
+    margin-bottom: 1.2rem;
+    margin-left: 0.4%;
 }
 
 .section-header h2 {
@@ -311,7 +312,7 @@ body {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 0.17rem; /* Pequena distância para o valor */
-    margin-right: 107rem;
+    margin-right: 93%;
 }
 
 .balance-label, .limit-label, .status-label {
