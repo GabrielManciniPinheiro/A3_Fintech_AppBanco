@@ -1,0 +1,369 @@
+/* --- Estilos Globais (Body, etc) --- */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: #0B0B22;
+    color: white;
+    margin: 0;
+}
+
+/* --- Estilos de Formulário (Login, Cadastro, Transferência) --- */
+.login-body {
+    display: grid;
+    place-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    background: #1C1C3A;
+    padding: 2rem;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+.container h1 {
+    margin-top: 0;
+    font-size: 1.5rem;
+    text-align: center;
+}
+.container p {
+    text-align: center;
+    color: #AAA;
+    margin-bottom: 2rem;
+}
+.form-group {
+    margin-bottom: 1.25rem;
+    position: relative;
+}
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #DDD;
+}
+.form-group input {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    box-sizing: border-box;
+    border-radius: 8px;
+    border: 1px solid #333;
+    background: #2A2A4A;
+    color: white;
+    font-size: 1rem;
+}
+.form-group input::placeholder { color: #777; }
+
+/* Botões */
+.btn, .btn-primary {
+    width: 100%;
+    padding: 1rem;
+    background: #3C3CFF;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: background 0.2s;
+    text-decoration: none;
+    box-sizing: border-box;
+    text-align: center;
+}
+.btn:hover:not(:disabled), .btn-primary:hover:not(:disabled) {
+    background: #5050FF;
+}
+.btn:disabled, .btn-primary:disabled {
+    background: #555;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+.btn-secondary {
+    width: 100%;
+    padding: 1rem;
+    background: transparent;
+    color: white;
+    border: 1px solid white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-align: center;
+    display: block;
+    box-sizing: border-box;
+    text-decoration: none;
+    margin-top: 1rem;
+}
+
+/* Links e Mensagens */
+#mensagem, #mensagemErro {
+    color: #FF6B6B;
+    margin-top: 1.5rem;
+    text-align: center;
+    font-weight: 500;
+    font-size: 1.1rem;
+}
+#mensagem.msg-sucesso { color: #50FF50; }
+.login-link, .back-link {
+    text-align: center;
+    margin-top: 1.5rem;
+    display: block;
+}
+.login-link a, .back-link { color: #809BFF; text-decoration: none; font-weight: 500; }
+
+/* Olho de Senha (Login) */
+#togglePassword {
+    position: absolute;
+    right: 1rem;
+    top: 2.6rem;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    color: #FF69B4;
+    font-size: 1.5rem;
+    padding: 0;
+}
+
+/* Tela de Valor da Transferência */
+.dest-info {
+    background: #2A2A4A;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+}
+.dest-info p { margin: 0; color: #AAA; text-align: left; }
+.dest-info h3 { margin: 0.25rem 0; }
+.dest-info span { color: #BBB; }
+#valorForm input {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+
+/* --- Estilos da Home (Seu layout, meu tema) --- */
+.home-body {
+    padding-bottom: 80px; /* Espaço para o menu de navegação inferior */
+}
+
+.header {
+    background: #1C1C3A;
+    padding: 1rem 1.5rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #3C3CFF; /* Cor azul do tema */
+    display: grid;
+    place-items: center;
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+
+.user-name {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.header-icons {
+    display: flex;
+    gap: 1rem;
+}
+
+.icon-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+}
+.icon-btn:hover {
+    opacity: 1;
+}
+
+.greeting {
+    padding: 1rem 1.5rem;
+    color: #AAA;
+}
+
+.main-content {
+    padding: 0 1.5rem;
+}
+
+.drag-handle { /* (Estilo básico para a alça) */
+    width: 50px;
+    height: 5px;
+    background: #333;
+    border-radius: 3px;
+    margin: 0.5rem auto 1.5rem;
+    opacity: 0.5;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.section-header h2 {
+    margin: 0;
+    font-size: 1.25rem;
+}
+
+.eye-icon {
+    cursor: pointer;
+}
+.eye-icon path, .eye-icon circle, .eye-icon line {
+    stroke: #809BFF; /* Cor azul clara para o ícone */
+    fill: none; /* Garante que o SVG seja apenas contorno */
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+.eye-icon circle {
+    fill: #809BFF; /* Preenche o círculo (íris) */
+}
+
+
+.action-cards {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.action-card {
+    background: #2A2A4A; /* Fundo de card escuro */
+    color: white;
+    padding: 1rem;
+    border-radius: 12px;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 500;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s;
+}
+.action-card:hover {
+    transform: translateY(-3px);
+}
+
+.card-icon.orange svg path {
+    fill: #FF6B00; /* Laranja do seu ícone */
+}
+
+.account-section, .card-section {
+    background: #1C1C3A; /* Fundo de card principal */
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.account-header, .card-header, .limit-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.account-info, .card-info, .limit-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.itau-logo span, .visa-logo span {
+    font-weight: bold;
+}
+.account-type, .card-name {
+    color: #AAA;
+    font-size: 0.9rem;
+}
+
+.chevron path {
+    stroke: #AAA;
+}
+
+.balance-section {
+    margin: 1.5rem 0;
+}
+
+/* Correção do "Olho" de Saldo */
+.balance-header-with-eye {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.17rem; /* Pequena distância para o valor */
+    margin-right: 107rem;
+}
+
+.balance-label, .limit-label, .status-label {
+    color: #AAA;
+    font-size: 0.9rem;
+    margin: 0; /* Garante que não haja margens extras */
+}
+.balance-value {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 0; /* Margin-top removido pois o header já espaça */
+    color: white;
+}
+.limit-value {
+    font-size: 1rem;
+    font-weight: 500;
+    color: white;
+}
+.divider {
+    height: 1px;
+    background: #2A2A4A;
+    margin: 1.5rem 0;
+}
+
+.card-status {
+    margin-top: 1rem;
+}
+
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-around;
+    background: #1C1C3A;
+    padding: 0.5rem 0;
+    box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.3);
+}
+.nav-item {
+    background: none;
+    border: none;
+    color: #777;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.75rem;
+}
+.nav-item.active {
+    color: #809BFF; /* Cor azul clara para o item ativo */
+}
+.nav-item.active svg path[fill="white"] {
+     fill: #809BFF; /* Preenche o ícone de casa com a cor ativa */
+}

@@ -88,13 +88,13 @@ public class TransferenciaServiceImpl implements TransferenciaService {
         Usuario remetente = tx.getRemetente();
         LocalDateTime agora = tx.getDataHora();
 
-        if (checkRegra1_ValorAcimaMedia(remetente, tx.getValor())) indice += 0.2;
+        if (checkRegra1_ValorAcimaMedia(remetente, tx.getValor())) indice += 0.15;
         if (checkRegra2_ContaDestinatarioRecente(contaDestinatario, agora)) indice += 0.1;
-        if (checkRegra3_AltoVolume24h(remetente, agora)) indice += 0.25;
-        if (checkRegra4_HorarioIncomum(agora)) indice += 0.1;
-        if (checkRegra5_MultiplosDestinatarios10min(remetente, agora)) indice += 0.25;
+        if (checkRegra3_AltoVolume24h(remetente, agora)) indice += 0.15;
+        if (checkRegra4_HorarioIncomum(agora)) indice += 0.2;
+        if (checkRegra5_MultiplosDestinatarios10min(remetente, agora)) indice += 0.3;
         if (checkRegra6_CancelamentosRecentes7d(remetente, agora)) indice += 0.2;
-        if (checkRegra7_HistoricoSuspeito(remetente)) indice += 0.2;
+        if (checkRegra7_HistoricoSuspeito(remetente)) indice += 0.25;
 
         log.info("Cálculo de fraude: CPF: {}, Índice Total: {}", remetente.getCpf(), indice);
         return indice;
@@ -107,12 +107,12 @@ public class TransferenciaServiceImpl implements TransferenciaService {
         if (ultimas10.isEmpty()) return false;
         BigDecimal soma = ultimas10.stream().map(Transferencia::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
         BigDecimal media = soma.divide(BigDecimal.valueOf(ultimas10.size()), 4, RoundingMode.HALF_UP);
-        BigDecimal mediaMais150pct = media.multiply(BigDecimal.valueOf(1.50));
-        return valorAtual.compareTo(mediaMais150pct) > 0;
+        BigDecimal mediaMais250pct = media.multiply(BigDecimal.valueOf(2.50));
+        return valorAtual.compareTo(mediaMais250pct) > 0;
     }
 
     private boolean checkRegra2_ContaDestinatarioRecente(Conta contaDestinatario, LocalDateTime dataTx) {
-        return ChronoUnit.DAYS.between(contaDestinatario.getDataCriacao(), dataTx) < 30;
+        return ChronoUnit.DAYS.between(contaDestinatario.getDataCriacao(), dataTx) < 5;
     }
 
     private boolean checkRegra3_AltoVolume24h(Usuario remetente, LocalDateTime dataTx) {
@@ -131,17 +131,17 @@ public class TransferenciaServiceImpl implements TransferenciaService {
                 .map(tx -> tx.getDestinatario().getId())
                 .distinct()
                 .count();
-        return destinatariosUnicos >= 3;
+        return destinatariosUnicos >= 5;
     }
 
     private boolean checkRegra6_CancelamentosRecentes7d(Usuario remetente, LocalDateTime dataTx) {
         long cancelamentos = transferenciaRepository.countByRemetenteAndStatusAndDataHoraBetween(
-                remetente, StatusTransferencia.CANCELADA, dataTx.minusDays(7), dataTx);
+                remetente, StatusTransferencia.FALHA_FRAUDE, dataTx.minusDays(1), dataTx);
         return cancelamentos > 0;
     }
 
     private boolean checkRegra7_HistoricoSuspeito(Usuario remetente) {
-        long txSuspeitas = transferenciaRepository.countByRemetenteAndIndiceFraudeGreaterThan(remetente, 0.0);
+        long txSuspeitas = transferenciaRepository.countByRemetenteAndIndiceFraudeGreaterThan(remetente, 0.30);
         return txSuspeitas > 0;
     }
 }
