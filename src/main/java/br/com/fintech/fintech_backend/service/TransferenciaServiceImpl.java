@@ -90,8 +90,8 @@ public class TransferenciaServiceImpl implements TransferenciaService {
 
         if (checkRegra1_ValorAcimaMedia(remetente, tx.getValor())) indice += 0.15;
         if (checkRegra2_ContaDestinatarioRecente(contaDestinatario, agora)) indice += 0.1;
-        if (checkRegra3_AltoVolume24h(remetente, agora)) indice += 0.15;
-        if (checkRegra4_HorarioIncomum(agora)) indice += 0.2;
+        if (checkRegra3_AltoVolume24h(remetente, agora)) indice += 0.2;
+        if (checkRegra4_HorarioIncomum(agora)) indice += 0.25;
         if (checkRegra5_MultiplosDestinatarios10min(remetente, agora)) indice += 0.3;
         if (checkRegra6_CancelamentosRecentes7d(remetente, agora)) indice += 0.2;
         if (checkRegra7_HistoricoSuspeito(remetente)) indice += 0.25;
